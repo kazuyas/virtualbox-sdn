@@ -29,4 +29,11 @@ git "/home/vagrant/trema-apps" do
     group "vagrant"  
 end
 
+git "/home/vagrant/trema-tutorial" do
+    repository "https://github.com/trema/tutorial.files.git"
+    revision "master"
+    action :sync
+    user "vagrant"
+    group "vagrant"
+end
 

@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
   # a directory on the host machine. If the path is relative, it is relative to
   # the project root. The second parameter must be an absolute path of where to
   # share the folder within the guest machine.
-  config.vm.synced_folder "examples", "/home/vagrant/examples"
+  # config.vm.synced_folder "examples", "/home/vagrant/examples"
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
