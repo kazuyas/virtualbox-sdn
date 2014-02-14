@@ -13,13 +13,13 @@ end
 
 gem_package "trema"
 
-git "/home/vagrant/trema" do                            
-    repository "https://github.com/trema/trema.git"
-    revision "master"                                   
-    action :sync                                     
-    user "vagrant"                                    
-    group "vagrant"  
-end
+#git "/home/vagrant/trema" do                            
+#    repository "https://github.com/trema/trema.git"
+#    revision "master"                                   
+#    action :sync                                     
+#    user "vagrant"                                    
+#    group "vagrant"  
+#end
 
 git "/home/vagrant/trema-apps" do                            
     repository "https://github.com/trema/apps.git"
