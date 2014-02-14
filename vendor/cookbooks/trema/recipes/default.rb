@@ -37,3 +37,10 @@ git "/home/vagrant/trema-tutorial" do
     group "vagrant"
 end
 
+git "/home/vagrant/ruby_topology" do
+    repository "https://github.com/yasuhito/ruby_topology.git"
+    revision "develop"
+    action :sync
+    user "vagrant"
+    group "vagrant"
+end
