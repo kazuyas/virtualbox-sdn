@@ -44,3 +44,9 @@ git "/home/vagrant/ruby_topology" do
     user "vagrant"
     group "vagrant"
 end
+
+gem_package "bundler"
+
+execute "bundle install" do
+  cwd "/home/vagrant/ruby_topology"
+end
