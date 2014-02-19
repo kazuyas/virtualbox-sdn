@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
   # doesn't already exist on the user's system.
   
   config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-ubuntu-12.04.box"                
+  #config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-ubuntu-12.04-i386.box"
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.provider "virtualbox" do |v|
