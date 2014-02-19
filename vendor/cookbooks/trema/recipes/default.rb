@@ -7,8 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w{ruby1.9.3 git libpcap-dev libsqlite3-dev libglib2.0-dev tmux vim graphviz}.each do |package_name|
-	package package_name
+%w{ruby1.9.3 git libpcap-dev libsqlite3-dev libglib2.0-dev tmux vim graphviz mini-httpd}.each do | package_name |
+    package package_name
 end
 
 gem_package "trema"
@@ -49,4 +49,18 @@ gem_package "bundler"
 
 execute "bundle install" do
   cwd "/home/vagrant/ruby_topology"
+end
+
+bash "start mini-httpd" do
+  user "root"
+  code <<-'EOT'
+    mkdir -p /home/vagrant/public_html
+    cp /usr/share/mini-httpd/html/index.html /home/vagrant/public_html
+    chown -R vagrant.vagrant /home/vagrant/public_html
+    cp /etc/default/mini-httpd /etc/default/mini-httpd.orig
+    sed -e 's/START=0/START=1/' < /etc/default/mini-httpd.orig > /etc/default/mini-httpd
+    cp /etc/mini-httpd.conf /etc/mini-httpd.conf.orig
+    sed -e 's/host=localhost/host=0.0.0.0/' -e 's/data_dir=\/usr\/share\/mini-httpd\/html/data_dir=\/home\/vagrant\/public_html/' < /etc/mini-httpd.conf.orig > /etc/mini-httpd.conf
+    service mini-httpd start
+  EOT
 end

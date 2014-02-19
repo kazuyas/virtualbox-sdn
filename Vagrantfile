@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  # config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 80, host: 8080
 
   # Share an additional folder to the guest VM. The first parameter is a path to
   # a directory on the host machine. If the path is relative, it is relative to
