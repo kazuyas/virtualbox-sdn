@@ -6,20 +6,26 @@ Vagrant.configure("2") do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "opscode-ubuntu-12.04"
-  #config.vm.box = "opscode-ubuntu-12.04-i386"
+  # default provider
+  config.vm.provider :virtualbox do |vb, override|
+    # Every Vagrant virtual environment requires a box to build off of.
+    override.vm.box = "opscode-ubuntu-12.04"
+    # override.vm.box = "opscode-ubuntu-12.04-i386"
 
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
-  
-  config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-ubuntu-12.04.box"                
-  #config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-ubuntu-12.04-i386.box"
+    # The url from where the 'config.vm.box' box will be fetched if it
+    # doesn't already exist on the user's system.
+    override.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-ubuntu-12.04.box"
+    # override.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-ubuntu-12.04-i386.box"
 
-  # Boot with a GUI so you can see the screen. (Default is headless)
-  # config.vm.provider "virtualbox" do |v|
-  #   v.gui = true
-  # end
+    # Boot with a GUI so you can see the screen. (Default is headless)
+    # vb.gui = true
+  end
+
+  # lxc provider
+  config.vm.provider :lxc do |lxc, override|
+    override.vm.box = "vagrant-lxc-precise64-2013-10-23"
+    override.vm.box_url = "https://dl.dropboxusercontent.com/u/13510779/vagrant-lxc-precise-amd64-2013-10-23.box"
+  end
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -67,7 +73,7 @@ Vagrant.configure("2") do |config|
   # end
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
-  # path, and data_bags path (all relative to this Vagrantfile), and adding 
+  # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
   config.vm.provision :chef_solo do |chef|
@@ -78,9 +84,9 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "build-essential"
     chef.add_recipe "trema"
 
-  
+
     # You may also specify custom JSON attributes:
-    chef.json = { 
+    chef.json = {
       :build_essential => {
         :compiletime => true
          }

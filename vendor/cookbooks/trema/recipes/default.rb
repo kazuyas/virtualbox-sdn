@@ -10,6 +10,16 @@
 %w{ruby1.9.3 git libpcap-dev libsqlite3-dev libglib2.0-dev tmux vim graphviz mini-httpd}.each do | package_name |
     package package_name
 end
+# needed in vagrant-lxc-precise-amd64-2013-10-23.box
+execute "update-alternatives --set ruby /usr/bin/ruby1.9.1" do
+    not_if "update-alternatives --query ruby | fgrep 'Value: /usr/bin/ruby1.9.1'"
+end
+execute "update-alternatives --set gem /usr/bin/gem1.9.1" do
+    not_if "update-alternatives --query gem | fgrep 'Value: /usr/bin/gem1.9.1'"
+end
+execute "mkdir /dev/net; mknod /dev/net/tun c 10 200; chmod 0666 /dev/net/tun" do
+    not_if { ::File.exists?("/dev/net/tun") }
+end
 
 gem_package "trema"
 
