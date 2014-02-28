@@ -7,58 +7,53 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w{ruby1.9.3 git libpcap-dev libsqlite3-dev libglib2.0-dev tmux vim graphviz mini-httpd}.each do | package_name |
-    package package_name
+%w{git libpcap-dev libsqlite3-dev libglib2.0-dev tmux vim graphviz mini-httpd}.each do | package_name |
+  package package_name
 end
 # needed in vagrant-lxc-precise-amd64-2013-10-23.box
-execute "update-alternatives --set ruby /usr/bin/ruby1.9.1" do
-    not_if "update-alternatives --query ruby | fgrep 'Value: /usr/bin/ruby1.9.1'"
-end
-execute "update-alternatives --set gem /usr/bin/gem1.9.1" do
-    not_if "update-alternatives --query gem | fgrep 'Value: /usr/bin/gem1.9.1'"
-end
 execute "mkdir /dev/net; mknod /dev/net/tun c 10 200; chmod 0666 /dev/net/tun" do
-    not_if { ::File.exists?("/dev/net/tun") }
+  not_if { ::File.exists?("/dev/net/tun") }
 end
 
 gem_package "trema"
 
-#git "/home/vagrant/trema" do                            
-#    repository "https://github.com/trema/trema.git"
-#    revision "master"                                   
-#    action :sync                                     
-#    user "vagrant"                                    
-#    group "vagrant"  
+#git "/home/vagrant/trema" do
+#  repository "https://github.com/trema/trema.git"
+#  revision "master"
+#  action :sync
+#  user "vagrant"
+#  group "vagrant"
 #end
 
-git "/home/vagrant/trema-apps" do                            
-    repository "https://github.com/trema/apps.git"
-    revision "master"                                   
-    action :sync                                     
-    user "vagrant"                                    
-    group "vagrant"  
+git "/home/vagrant/trema-apps" do
+  repository "https://github.com/trema/apps.git"
+  revision "master"
+  action :sync
+  user "vagrant"
+  group "vagrant"
 end
 
 git "/home/vagrant/trema-tutorial" do
-    repository "https://github.com/trema/tutorial.files.git"
-    revision "master"
-    action :sync
-    user "vagrant"
-    group "vagrant"
+  repository "https://github.com/trema/tutorial.files.git"
+  revision "master"
+  action :sync
+  user "vagrant"
+  group "vagrant"
 end
 
 git "/home/vagrant/ruby_topology" do
-    repository "https://github.com/yasuhito/ruby_topology.git"
-    revision "develop"
-    action :sync
-    user "vagrant"
-    group "vagrant"
+  repository "https://github.com/yasuhito/ruby_topology.git"
+  revision "develop"
+  action :sync
+  user "vagrant"
+  group "vagrant"
 end
 
 gem_package "bundler"
 
-execute "bundle install" do
+rvm_shell "bundle install" do
   cwd "/home/vagrant/ruby_topology"
+  code "bundle install"
 end
 
 bash "start mini-httpd" do

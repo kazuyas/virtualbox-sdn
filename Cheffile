@@ -3,5 +3,8 @@ site "http://community.opscode.com/api/v1"
 cookbook "apt"
 cookbook "build-essential"
 
+cookbook 'rvm',
+  :git => 'https://github.com/fnichol/chef-rvm.git'
+
 cookbook 'trema',
   :path => 'vendor/cookbooks/trema'

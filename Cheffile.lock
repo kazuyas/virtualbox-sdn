@@ -3,6 +3,15 @@ SITE
   specs:
     apt (2.3.8)
     build-essential (1.4.4)
+    chef_gem (0.1.0)
+
+GIT
+  remote: https://github.com/fnichol/chef-rvm.git
+  ref: master
+  sha: 87f58d428c160337c1581ed1130a1a53d94e5126
+  specs:
+    rvm (0.9.1)
+      chef_gem (>= 0.0.0)
 
 PATH
   remote: vendor/cookbooks/trema
@@ -12,5 +21,6 @@ PATH
 DEPENDENCIES
   apt (>= 0)
   build-essential (>= 0)
+  rvm (>= 0)
   trema (>= 0)
 

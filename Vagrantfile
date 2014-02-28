@@ -82,6 +82,8 @@ Vagrant.configure("2") do |config|
     chef.data_bags_path = "./data_bags"
     chef.add_recipe "apt"
     chef.add_recipe "build-essential"
+    chef.add_recipe "rvm::system"
+    chef.add_recipe "rvm::vagrant"
     chef.add_recipe "trema"
 
 
@@ -89,8 +91,11 @@ Vagrant.configure("2") do |config|
     chef.json = {
       :build_essential => {
         :compiletime => true
-         }
-       }
+      },
+      :rvm => {
+        :default_ruby => "ruby-2.1.1",
+      }
+    }
   end
 
   # Enable provisioning with chef server, specifying the chef server URL,
