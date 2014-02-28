@@ -1,8 +1,8 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
-    apt (1.5.0)
-    build-essential (1.2.0)
+    apt (2.3.8)
+    build-essential (1.4.4)
 
 PATH
   remote: vendor/cookbooks/trema

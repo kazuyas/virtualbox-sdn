@@ -1,6 +1,6 @@
-.chef/knife.rb
-cookbooks
-tmp
-.vagrant
+/.chef/knife.rb
+/cookbooks
+/tmp
+/.vagrant
 
 
